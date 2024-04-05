@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: processing-app
+  labels:
+    app: processing-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: processing-app
+  template:
+    metadata:
+      labels:
+        app: processing-app
+    spec:
+      containers:
+        - name: processing-app
+          image: docker.io/library/processing-app:latest
+          ports:
+            - containerPort: 8080
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: RABBITMQ_USERNAME
+              value: rabbituser
+            - name: RABBITMQ_PASSWORD
+              value: rabbitpass
