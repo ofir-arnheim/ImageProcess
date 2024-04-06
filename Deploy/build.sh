@@ -11,6 +11,7 @@ cd ../ProcessingApp
 docker build -t processing-app:latest .
 docker save processing-app | (eval $(minikube docker-env) && docker load)
 
+cd ../Deploy
 kubectl apply -f rabbitmq_deployment.yaml
 kubectl apply -f rabbitmq_service.yaml
 kubectl apply -f web_app_deployment.yaml
